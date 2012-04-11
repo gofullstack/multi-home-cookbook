@@ -38,13 +38,15 @@ unless node.has_key?(:cloud)
     iface.keys.each {|addr| ips[p] << addr if !addr.include?(':') }
   end
 
-  node[:cloud] = {
-    :local_hostname  => node[:hostname],
-    :local_ipv4      => ips[:private].first,
-    :private_ips     => ips[:private],
-    :provider        => 'internal',
-    :public_hostname => node[:hostname],
-    :public_ips      => ips[:public],
-    :public_ipv4     => ips[:public].first
-  }
+  unless ips.values.any?(&:empty?)
+    node[:cloud] = {
+      :local_hostname  => node[:hostname],
+      :local_ipv4      => ips[:private].first,
+      :private_ips     => ips[:private],
+      :provider        => 'internal',
+      :public_hostname => node[:hostname],
+      :public_ips      => ips[:public],
+      :public_ipv4     => ips[:public].first
+    }
+  end
 end
