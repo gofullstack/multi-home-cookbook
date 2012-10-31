@@ -17,20 +17,20 @@
 # limitations under the License.
 #
 
-# Set up a 'cloud' attribute for the node using eth0 as the public IP and 
-# eth1 as the private.
+# Set up a 'cloud' attribute for the node using eth0 as the private IP and 
+# eth1 as the public.
 
 unless node.has_key?(:cloud)
   require 'ipaddr'
 
   node_network_interfaces = node[:network][:interfaces]
   ifaces = {
-    :public  => ((node_network_interfaces[:eth0] || {})[:addresses] || {}),
-    :private => ((node_network_interfaces[:eth1] || {})[:addresses] || {})
+    :private  => ((node_network_interfaces[:eth0] || {})[:addresses] || {}),
+    :public   => ((node_network_interfaces[:eth1] || {})[:addresses] || {})
   }
   ips = {
-    :public  => [],
-    :private => []
+    :private => [],
+    :public  => []
   }
 
   ifaces.each do |p, iface|
