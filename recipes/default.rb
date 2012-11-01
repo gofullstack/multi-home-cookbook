@@ -44,7 +44,7 @@ unless node.has_key?(:cloud)
       :local_ipv4      => ips[:private].first,
       :private_ips     => ips[:private],
       :provider        => 'internal',
-      :public_hostname => node[:hostname],
+      :public_hostname => node['fqdn'],
       :public_ips      => ips[:public],
       :public_ipv4     => ips[:public].first
     }
