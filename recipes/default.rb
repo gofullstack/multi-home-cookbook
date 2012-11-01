@@ -23,7 +23,7 @@
 unless node.has_key?(:cloud)
   require 'ipaddr'
 
-  node_network_interfaces = node[:network][:interfaces]
+  node_network_interfaces = node['network']['interfaces']
   ifaces = {
     :private  => ((node_network_interfaces[:eth0] || {})[:addresses] || {}),
     :public   => ((node_network_interfaces[:eth1] || {})[:addresses] || {})
@@ -39,7 +39,7 @@ unless node.has_key?(:cloud)
   end
 
   unless ips.values.any?(&:empty?)
-    node[:cloud] = {
+    node['cloud'] = {
       :local_hostname  => node[:hostname],
       :local_ipv4      => ips[:private].first,
       :private_ips     => ips[:private],
