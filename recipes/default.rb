@@ -39,7 +39,7 @@ unless node.has_key?(:cloud)
   end
 
   unless ips.values.any?(&:empty?)
-    node['cloud'] = {
+    node.default['cloud'] = {
       :local_hostname  => node[:hostname],
       :local_ipv4      => ips[:private].first,
       :private_ips     => ips[:private],
